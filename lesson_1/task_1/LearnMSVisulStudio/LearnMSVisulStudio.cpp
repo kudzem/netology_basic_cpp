@@ -38,6 +38,7 @@ int main() {
     for (int i = 0; i < arr_sizes[1]; ++i) {
         fout << (arr[1][(i + arr_sizes[1] - 1) % arr_sizes[1]]) << " ";
     }
+	delete [] arr[1];
 
     fout << '\n';
 
@@ -45,8 +46,9 @@ int main() {
     for (int i = 0; i < arr_sizes[0]; ++i) {
         fout << (arr[0][(i + 1) % arr_sizes[0]]) << " ";
     }
+	delete [] arr[0];
 
-    fin.close();
+    fout.close();
 
     return 0;
 }
