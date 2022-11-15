@@ -22,13 +22,14 @@ int main()
     std::string answer;
     std::cin >> answer;
 
-    int init_value = 1;
-    if (answer == "yes") {
+    Counter cnt;
+    if (answer == "yes")
+    {
         std::cout << "Enter initial counter value : ";
+        unsigned init_value = 0;
         std::cin >> init_value;
+        cnt = Counter(init_value);
     }
-
-    Counter cnt(init_value);
 
     while (true) {
         std::cout << "Enter command('+', '-', '=' или 'x') : " << std::endl;
