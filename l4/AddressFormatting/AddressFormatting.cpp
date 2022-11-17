@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 class Address {
 public:
@@ -10,6 +11,10 @@ public:
         _houseNumber(houseNumber),
         _appartNumber(appartNumber)
     {};
+
+    bool operator<(const Address& other) {
+        return other._city < this->_city;
+    }
 
     std::string get() const {
         return _city + ", " +
@@ -56,13 +61,15 @@ int main()
     }
     in_file.close();
 
+    std::sort(addresses_from_file, addresses_from_file + number_of_addresses_in_db);
+
     std::ofstream out_file("out.txt");
     if (!out_file.is_open()) {
         return 2;
     }
 
     out_file << number_of_addresses_in_db << std::endl;
-    for (int i = number_of_addresses_in_db - 1; i >= 0; i--) {
+    for (unsigned i = 0; i < number_of_addresses_in_db; ++i) {
         out_file << addresses_from_file[i]->get() << std::endl;
     }
     out_file.close();
