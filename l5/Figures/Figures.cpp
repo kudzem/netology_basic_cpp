@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <numeric>
 
 
 # define M_PI          3.141592653589793238462643383279502884L /* pi */
@@ -16,6 +17,17 @@ enum class FigureType {
     Rectangle,
     Square,
     Diamond
+};
+
+enum class RightTriangleSide {
+    AdjacentKatet,
+    OppositeKatet,
+    Hypotenuse
+};
+
+enum class IsoscelesTriangleSide {
+    Thigh,
+    Base
 };
 
 std::string FiguresTypesStr[] = { "Неизвестно",
@@ -35,11 +47,11 @@ std::string ShortCornerNames[] = { "A", "B", "C", "D", "E", "F" };
 
 class Figure {
 public:
-    Figure() : _sides(0), _side_length(nullptr), _corner_degree(nullptr)
+    Figure() : _sides(0), _side_length(nullptr), _corner_degree(nullptr), _type(FigureType::Unknown)
     {
     }
 
-    Figure(unsigned sides) : _sides(sides)
+    Figure(unsigned sides) : _sides(sides), _type(FigureType::Arbitrary)
     {
         _side_length = new double[_sides];
         _corner_degree = new double[_sides];
@@ -59,6 +71,13 @@ public:
 
     unsigned get_sides() const { return _sides; }
     virtual FigureType get_type() { return FigureType::Arbitrary; }
+
+    virtual bool correct() { 
+        if (_sides < 3) return true;
+        double corner_sum = std::accumulate(_corner_degree, _corner_degree + _sides, 0);
+        if (corner_sum == (_sides - 2) * 180) return true;
+        return false;
+    }
 
     double get_side_length(unsigned side_idx) {
         if (!_side_length) return -1;
@@ -87,9 +106,7 @@ protected:
     {}
 public:
     Triangle(double* side_length, double* corner_degree) : Figure(3, side_length, corner_degree)
-    {
-
-    }
+    {}
 
     Triangle(unsigned* side_length) : Triangle()
     {
@@ -103,6 +120,12 @@ public:
     }
 
     FigureType get_type() override { return FigureType::Triangle; }
+
+    virtual bool correct() override {
+        double corner_sum = std::accumulate(_corner_degree, _corner_degree + get_sides(), 0);
+        if(corner_sum != 180) return false;
+        return true;
+    }
 };
 
 class RightTriangle : public Triangle {
@@ -118,25 +141,36 @@ public:
     }
 
     FigureType get_type() override { return FigureType::RightTriangle; }
+
+    virtual bool correct() override { return true; }
 };
 
 class IsoscelesTriangle : public Triangle {
 public:
-    IsoscelesTriangle(double A, unsigned thigh) : Triangle()
+    IsoscelesTriangle(double A, double side, IsoscelesTriangleSide sideType) : Triangle()
     {
-        _side_length[0] = _side_length[1] = thigh;
-        _side_length[2] = sqrt(2*thigh*thigh*(1 - cos(A/180*M_PI)));
         _corner_degree[0] = A;
-        _corner_degree[1] = (180 - A)/2;
+        _corner_degree[1] = (180 - A) / 2;
         _corner_degree[2] = _corner_degree[1];
+
+        if (sideType == IsoscelesTriangleSide::Thigh) {
+            _side_length[0] = _side_length[1] = side;
+            _side_length[2] = sqrt(2 * side * side * (1 - cos(A / 180 * M_PI)));
+        }
+        else if (sideType == IsoscelesTriangleSide::Base) {
+            _side_length[2] = side;
+            _side_length[0] = _side_length[1] = sqrt(side * side / (2 * (1 - cos(A / 180 * M_PI))));
+        }
     }
 
     FigureType get_type() override { return FigureType::IsoscelesTriangle; }
+
+    virtual bool correct() override { return true; }
 };
 
 class EquilateralTriangle : public IsoscelesTriangle {
 public:
-    EquilateralTriangle(unsigned side) : IsoscelesTriangle(60, side)
+    EquilateralTriangle(double side) : IsoscelesTriangle(60, side, IsoscelesTriangleSide::Base)
     {}
 
     FigureType get_type() override { return FigureType::EquilateralTriangle; }
@@ -149,6 +183,12 @@ public:
     Quad(double* side_length, double* corner_degree) : Figure(4, side_length, corner_degree) {}
 
     FigureType get_type() override { return FigureType::Quad; }
+
+    virtual bool correct() override {
+        double corner_sum = std::accumulate(_corner_degree, _corner_degree + get_sides(), 0);
+        if (corner_sum != 360) return false;
+        return true;
+    }
 };
 
 class Parallelogram : public Quad {
@@ -162,6 +202,8 @@ public:
     }
 
     FigureType get_type() override { return FigureType::Parallelogram; }
+
+    virtual bool correct() override { return true; }
 };
 
 class Rectangle : public Parallelogram {
@@ -190,6 +232,10 @@ public:
 
 void print_info(Figure* f) {
     std::cout << FiguresTypesStr[static_cast<unsigned>(f->get_type())] << ":" << std::endl;
+
+    std::cout << (f->correct() ? "Правильная" : "Неправильная") << std::endl;
+
+    std::cout << "Количество сторон : " << f->get_sides() << std::endl;
     std::cout << "Стороны: ";
     const unsigned sides = f->get_sides();
     for (unsigned i = 0; i < sides; ++i) {
@@ -219,7 +265,7 @@ int main()
     all_figures.push_back(&fa);
 
     double tl[] = { 2,3,4 };
-    double tc[] = { 36,60,84 };
+    double tc[] = { 36,60,83 };
 
     Triangle t(tl,tc);
     all_figures.push_back(&t);
@@ -230,8 +276,11 @@ int main()
     RightTriangle rt(30, 30);
     all_figures.push_back(&rt);
 
-    IsoscelesTriangle it(10, 30);
+    IsoscelesTriangle it(10, 30, IsoscelesTriangleSide::Thigh);
     all_figures.push_back(&it);
+
+    IsoscelesTriangle it2(10, 5.23, IsoscelesTriangleSide::Base);
+    all_figures.push_back(&it2);
 
     EquilateralTriangle et(13);
     all_figures.push_back(&et);
