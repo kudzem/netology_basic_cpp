@@ -3,10 +3,8 @@
 
 #include <iostream>
 
-//#define MODE 1
-
 #ifndef MODE
-#error "Program mode is not set"
+#error Program mode is not set
 #elif MODE == 1
 int add(int a, int b) { return a + b; }
 #endif
