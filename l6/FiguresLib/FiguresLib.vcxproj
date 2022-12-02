@@ -142,6 +142,7 @@
     <ClInclude Include="Quad.h" />
     <ClInclude Include="RightTriangle.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="WrongFigureException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

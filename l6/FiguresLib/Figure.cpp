@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Figure.h"
+#include "WrongFigureException.h"
 
 std::string ShortSideNames[] = { "a", "b", "c", "d", "e", "f" };
 std::string ShortCornerNames[] = { "A", "B", "C", "D", "E", "F" };
@@ -8,6 +9,7 @@ std::string ShortCornerNames[] = { "A", "B", "C", "D", "E", "F" };
 
 Figure::Figure(unsigned sides) : _sides(sides)
 {
+    if (sides == 0) { throw ZeroSidesException(); }
     _side_length = new double[_sides];
     _corner_degree = new double[_sides];
 }
@@ -16,6 +18,10 @@ Figure::Figure(unsigned sides, double* side_length, double* corner_degree) : Fig
     for (unsigned s = 0; s < _sides; ++s) {
         _side_length[s] = side_length[s];
         _corner_degree[s] = corner_degree[s];
+    }
+
+    if (!correct()) {
+        throw WrongFigureCorners();
     }
 }
 

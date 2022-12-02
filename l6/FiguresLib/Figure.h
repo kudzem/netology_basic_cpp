@@ -5,7 +5,7 @@
 
 class Figure {
 public:
-    Figure() : _sides(0), _side_length(nullptr), _corner_degree(nullptr) {}
+    //Figure() : _sides(0), _side_length(nullptr), _corner_degree(nullptr) {}
     Figure(unsigned sides);
     Figure(unsigned sides, double* side_length, double* corner_degree);
 

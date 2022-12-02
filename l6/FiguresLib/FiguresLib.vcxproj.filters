@@ -56,5 +56,8 @@
     <ClInclude Include="Diamond.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WrongFigureException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
