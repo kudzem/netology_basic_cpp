@@ -1,12 +1,15 @@
 #pragma once
 #include <string>
 
+int nod(int a, int b);
+
 class Fraction
 {
 private:
 	int numerator_;
 	int denominator_;
 
+	void normalise();
 public:
 	Fraction(int numerator, int denominator)
 	{
@@ -38,8 +41,29 @@ public:
 		return !(*this < other);
 	}
 
-	std::string str() const {
-		return std::to_string(numerator_) + "/" + std::to_string(denominator_);
-	}
+	Fraction operator+(const Fraction& other) const;
+	Fraction operator-(const Fraction& other) const;
+	Fraction operator*(const Fraction& other) const;
+	Fraction operator/(const Fraction& other) const;
 
+	Fraction& operator++();
+	Fraction operator++(int);
+
+	Fraction& operator--();
+	Fraction operator--(int);
+
+	operator int();
+	explicit operator double();
+
+	friend Fraction operator-(const Fraction& obj);
+	friend std::ostream& operator<<(std::ostream& os, const Fraction& obj);
+	friend std::istream& operator>>(std::istream& os, Fraction& obj);
+
+	std::string str() const;
+	std::string operator() () const;
 };
+
+Fraction operator-(const Fraction& obj);
+
+std::ostream& operator<<(std::ostream& os, const Fraction& obj);
+std::ostream& operator>>(std::ostream& os, Fraction& obj);
