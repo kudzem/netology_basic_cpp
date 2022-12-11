@@ -10,12 +10,39 @@ private:
 	int denominator_;
 
 	void normalise();
+
 public:
+
+	static int counter;
 	Fraction(int numerator, int denominator)
 	{
 		numerator_ = numerator;
 		denominator_ = denominator;
 	}
+
+	//Fraction(Fraction& other) {
+	//	numerator_ = other.numerator_;
+	//	denominator_ = other.denominator_;
+	//}
+
+	//Fraction(Fraction&& other) noexcept {
+	//	numerator_ = other.numerator_;
+	//	denominator_ = other.denominator_;
+	//}
+
+	//Fraction operator=(Fraction& other) {
+	//	numerator_ = other.numerator_;
+	//	denominator_ = other.denominator_;
+	//	return *this;
+	//}
+
+	//Fraction operator=(Fraction&& other) noexcept {
+	//	numerator_ = other.numerator_;
+	//	denominator_ = other.denominator_;
+	//	return *this;
+	//}
+
+
 
 	inline bool operator==(const Fraction& other) const {
 		return other.numerator_ * denominator_ == other.denominator_ * numerator_;
@@ -66,4 +93,4 @@ public:
 Fraction operator-(const Fraction& obj);
 
 std::ostream& operator<<(std::ostream& os, const Fraction& obj);
-std::ostream& operator>>(std::ostream& os, Fraction& obj);
+std::istream& operator>>(std::istream& os, Fraction& obj);

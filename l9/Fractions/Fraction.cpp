@@ -1,6 +1,8 @@
 #include "Fraction.h"
 #include <iostream>
 
+int Fraction::counter = 0;
+
 void
 Fraction::normalise() {
 	if (denominator_ < 0) {
@@ -8,13 +10,15 @@ Fraction::normalise() {
 		numerator_ *= -1;
 	}
 
-	int n = nod(denominator_, numerator_);
+	int n = nod(denominator_, abs(numerator_));
 	denominator_ /= n;
 	numerator_ /= n;
 }
 
 Fraction 
 Fraction::operator+(const Fraction& other) const {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "add(" << counter << ")" << other.numerator_ << "/" << other.denominator_ << std::endl;
 	Fraction f(this->numerator_ * other.denominator_ + this->denominator_ * other.numerator_,
 		other.denominator_ * this->denominator_);
 	f.normalise();
@@ -23,6 +27,8 @@ Fraction::operator+(const Fraction& other) const {
 
 Fraction
 Fraction::operator-(const Fraction& other) const {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "sub(" << counter << ")" << other.numerator_ << "/" << other.denominator_ << std::endl;
 	Fraction f(this->numerator_ * other.denominator_ - this->denominator_ * other.numerator_,
 		other.denominator_ * this->denominator_);
 	f.normalise();
@@ -31,6 +37,8 @@ Fraction::operator-(const Fraction& other) const {
 
 Fraction
 Fraction::operator*(const Fraction& other) const {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "mult(" << counter << ")" << other.numerator_ << "/" << other.denominator_ << std::endl;
 	Fraction f(other.numerator_ * this->numerator_, other.denominator_ * this->denominator_);
 	f.normalise();
 	return f;
@@ -38,6 +46,8 @@ Fraction::operator*(const Fraction& other) const {
 
 Fraction
 Fraction::operator/(const Fraction& other) const {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "div(" << counter << ")" << other.numerator_ << "/" << other.denominator_ << std::endl;
 	Fraction f(this->numerator_ * other.denominator_, this->denominator_ * other.numerator_);
 	f.normalise();
 	return f;
@@ -45,6 +55,8 @@ Fraction::operator/(const Fraction& other) const {
 
 Fraction&
 Fraction::operator++() {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "pre++(" << counter << ")" << std::endl;
 	numerator_ += this->denominator_;
 	normalise();
 	return *this;
@@ -52,6 +64,8 @@ Fraction::operator++() {
 
 Fraction
 Fraction::operator++(int) {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "post++(" << counter << ")" << std::endl;
 	Fraction prev = *this;
 	numerator_ += denominator_;
 	return prev;
@@ -59,13 +73,18 @@ Fraction::operator++(int) {
 
 Fraction&
 Fraction::operator--() {
-	numerator_ -= this->denominator_;
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "pre--(" << counter << ")" << std::endl;
+	this->numerator_ -= this->denominator_;
 	normalise();
 	return *this;
 }
 
 Fraction
 Fraction::operator--(int) {
+	counter++;
+	std::cout << this->numerator_ << "/" << denominator_ << "post--(" << counter << ")" << std::endl;
+
 	Fraction prev = *this;
 	numerator_ -= denominator_;
 	return prev;
