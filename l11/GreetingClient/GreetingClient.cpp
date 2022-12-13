@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GreetingLib.h"
+#include "MyLeaverLib.h"
 #include <clocale>
 
 int main()
@@ -9,4 +10,5 @@ int main()
 	std::string your_name;
 	std::cin >> your_name;
     MyGreetingLib::greet(your_name);
+	MyLeaverLib::byebye(your_name);
 }

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GreetingLib", "GreetingLib.vcxproj", "{3C7C0D0F-DA6B-4425-A5EA-2E7560455908}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GreetingClient", "..\..\l11\GreetingClient\GreetingClient.vcxproj", "{48FCC040-75F4-4308-9D77-05B8DF75847C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GreetingClient", "..\GreetingClient\GreetingClient.vcxproj", "{48FCC040-75F4-4308-9D77-05B8DF75847C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyLeaverLib", "..\MyLeaverLib\MyLeaverLib.vcxproj", "{D9D17EB9-E021-4E78-93FE-130C53D48BDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{48FCC040-75F4-4308-9D77-05B8DF75847C}.Release|x64.Build.0 = Release|x64
 		{48FCC040-75F4-4308-9D77-05B8DF75847C}.Release|x86.ActiveCfg = Release|Win32
 		{48FCC040-75F4-4308-9D77-05B8DF75847C}.Release|x86.Build.0 = Release|Win32
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Debug|x64.ActiveCfg = Debug|x64
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Debug|x64.Build.0 = Debug|x64
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Debug|x86.ActiveCfg = Debug|Win32
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Debug|x86.Build.0 = Debug|Win32
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Release|x64.ActiveCfg = Release|x64
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Release|x64.Build.0 = Release|x64
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Release|x86.ActiveCfg = Release|Win32
+		{D9D17EB9-E021-4E78-93FE-130C53D48BDC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
