@@ -14,23 +14,20 @@ int main()
     setlocale(LC_ALL, "Russian");
 
     try {
-        Figure f(0);
-        all_figures.push_back(&f);
+        //Figure f(0);
+        //all_figures.push_back(&f);
 
         double fl[] = { 2,3,4,5,6 };
-        double fc[] = { 36,60,84,200,234 };
+        double fc[] = { 36,60,84,200,160 };
 
         Figure fa(5, fl, fc);
         all_figures.push_back(&fa);
 
         double tl[] = { 2,3,4 };
-        double tc[] = { 36,60,83 };
+        double tc[] = { 36,60,84 };
 
         Triangle t(tl, tc);
         all_figures.push_back(&t);
-
-        double ql[] = { 2,3,4,1 };
-        double qc[] = { 56,80,104,120 };
 
         RightTriangle rt(30, 30);
         all_figures.push_back(&rt);
@@ -43,6 +40,9 @@ int main()
 
         EquilateralTriangle et(13);
         all_figures.push_back(&et);
+
+        double ql[] = { 2,3,4,1 };
+        double qc[] = { 56,80,104,120 };
 
         Quad q(ql, qc);
         all_figures.push_back(&q);
@@ -58,6 +58,10 @@ int main()
 
         Diamond d(4, 60);
         all_figures.push_back(&d);
+
+        for (auto f : all_figures) {
+            print_info(f);
+        }
     }
     catch (std::exception& e) {
         std::cout << e.what() << std::endl;
@@ -66,10 +70,6 @@ int main()
     catch (...) {
         std::cout << "Something went wrong" << std::endl;
         return 0;
-    }
-
-    for (auto f : all_figures) {
-        print_info(f);
     }
 
 }

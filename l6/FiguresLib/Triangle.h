@@ -1,6 +1,7 @@
 #pragma once
 #include "Figure.h"
 #include <math.h>
+
 #define _USE_MATH_DEFINES
 
 

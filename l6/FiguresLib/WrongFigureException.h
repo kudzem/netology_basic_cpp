@@ -6,10 +6,10 @@
 
 class ZeroSidesException : public std::exception {
 public:
-	virtual const char* what() const { return "Количество сторон фигуры равно 0"; }
+	virtual const char* what() const noexcept override { return "Количество сторон фигуры равно 0"; }
 };
 
 class WrongFigureCorners : public std::exception {
 public:
-	virtual const char* what() const { return "Сумма углов не соотвествует количеству сторон"; }
+	virtual const char* what() const noexcept override { return "Сумма углов не соотвествует количеству сторон"; }
 };

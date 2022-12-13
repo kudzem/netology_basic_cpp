@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.5])
+project(second_cmake_project)
+set(SOURCE_FILES Figure.cpp Triangle.cpp FiguresLib.cpp)
+add_compile_options(-std=c++0x)
+add_executable(figures ${SOURCE_FILES})
