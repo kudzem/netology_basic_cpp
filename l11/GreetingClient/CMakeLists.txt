@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.5)
+project(greeting)
+include_directories(../GreetingLib/ ../MyLeaverLib/)
+add_library(MyGreetingLib STATIC ../GreetingLib/GreetingLib.cpp ../GreetingLib/GreetingLib.h)
+add_library(MyLeaverLib SHARED ../MyLeaverLib/MyLeaverLib.cpp ../MyLeaverLib/MyLeaverLib.h)
+add_executable(Greeting GreetingClient.cpp)
+target_link_libraries(Greeting MyGreetingLib MyLeaverLib)
