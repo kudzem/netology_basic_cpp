@@ -40,7 +40,7 @@ public:
 	Race(unsigned distance, RaceType raceType) : _distance(distance), _raceType(raceType) {
 		std::fill(VehicleIsChosen, VehicleIsChosen + VehicleTypeLast, false);
 	}
-	virtual ~Race() {}
+	virtual ~Race();
 
 	size_t count_participant() const { return participants.size(); }
 	virtual bool add_participant(VehicleType vt);

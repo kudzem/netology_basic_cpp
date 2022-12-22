@@ -3,6 +3,12 @@
 #include <iomanip>
 
 
+Race::~Race() {
+	for (Vehicle* participant : participants) {
+		delete participant;
+	}
+}
+
 std::string 
 RaceResult::print() 
 { 

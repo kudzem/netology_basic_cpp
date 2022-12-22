@@ -19,6 +19,7 @@ __declspec(dllimport) extern const char* VehicleTypeStr[];
 class Vehicle {
 public:
 	Vehicle(unsigned speed) : _speed(speed) {}
+	virtual ~Vehicle() {}
 	virtual double get_race_time(unsigned distance) = 0;
 	virtual VehicleType get_type() const = 0;
 protected:
