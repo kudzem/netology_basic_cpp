@@ -52,7 +52,7 @@ Race::add_participant(VehicleType vt)
 	}
 	case VehicleTypeBoots: {
 		participants.push_back(new Boots());
-		return true;
+		break;
 	}
 	case VehicleTypeCentaur: {
 		participants.push_back(new Centaur());
